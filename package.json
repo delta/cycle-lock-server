@@ -1,0 +1,61 @@
+{
+  "name": "cycle-lock-server",
+  "version": "1.0.0",
+  "description": "The server for NITT Cycle app.",
+  "main": "./src/server.ts",
+  "scripts": {
+    "dev": "nodemon --watch src --exec ts-node ./src/server.ts",
+    "build": "rm -rf ./build && tsc",
+    "start": "npm run build && node build/server.ts",
+    "lint": "eslint . --ext .ts --fix",
+    "lint:github": "eslint . --ext .ts",
+    "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prepare": "husky install",
+    "session:debug": "DEBUG=express-session npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delta/cycle-lock-server.git"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "express",
+    "mysql",
+    "prisma"
+  ],
+  "author": "delta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/delta/cycle-lock-server/issues"
+  },
+  "homepage": "https://github.com/delta/cycle-lock-server#readme",
+  "dependencies": {
+    "@prisma/client": "^3.3.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.13.0",
+    "helmet": "^4.6.0",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.4",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "nodemon": "^2.0.14",
+    "prettier": "^2.4.1",
+    "prisma": "^3.3.0",
+    "ts-node": "^10.4.0"
+  }
+}
