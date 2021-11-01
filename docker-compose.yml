@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    container_name: cycle_app_db
+    image: mysql:8.0
+    volumes:
+      - ./mysql-volume:/var/lib/mysql
+    restart: always
+    env_file:
+      - ./.docker.env
+
+  phpmyadmin:
+    container_name: cycle_app_pma
+    image: phpmyadmin
+    restart: always
+    env_file:
+      - ./.docker.env
+    ports:
+      - '${PMA_LOCAL_PORT}:80'
+    depends_on:
+      - db
+
+  cycleappserver:
+    container_name: cycle_app_backend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - '${API_LOCAL_PORT}:${PORT}'
