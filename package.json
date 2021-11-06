@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/delta/cycle-lock-server#readme",
   "dependencies": {
-    "@prisma/client": "^3.3.0",
+    "@prisma/client": "^3.4.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -55,7 +55,7 @@
     "husky": "^7.0.4",
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
-    "prisma": "^3.3.0",
+    "prisma": "^3.4.1",
     "ts-node": "^10.4.0"
   }
 }

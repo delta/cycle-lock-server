@@ -9,3 +9,15 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model CycleStand {
+  id       String @id @unique
+  location String @db.VarChar(255)
+  cDock    CycleDock[]
+}
+
+model CycleDock {
+  bluetooth String     @id @unique
+  cStand    CycleStand @relation(fields: [stand], references: [id])
+  stand     String
+}
