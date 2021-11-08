@@ -11,13 +11,13 @@ datasource db {
 }
 
 model CycleStand {
-  id       String @id @unique
-  location String @db.VarChar(255)
-  cDock    CycleDock[]
+  id           String @id @unique
+  location     String @db.VarChar(255)
+  cycleDock    CycleDock[]
 }
 
 model CycleDock {
-  bluetooth String     @id @unique
-  cStand    CycleStand @relation(fields: [stand], references: [id])
-  stand     String
+  cycleStandId  String     @id @unique
+  cycleStand    CycleStand @relation(fields: [stand], references: [id])
+  stand         String
 }

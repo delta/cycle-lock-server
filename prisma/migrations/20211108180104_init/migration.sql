@@ -9,11 +9,11 @@ CREATE TABLE `CycleStand` (
 
 -- CreateTable
 CREATE TABLE `CycleDock` (
-    `bluetooth` VARCHAR(191) NOT NULL,
+    `cycleStandId` VARCHAR(191) NOT NULL,
     `stand` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `CycleDock_bluetooth_key`(`bluetooth`),
-    PRIMARY KEY (`bluetooth`)
+    UNIQUE INDEX `CycleDock_cycleStandId_key`(`cycleStandId`),
+    PRIMARY KEY (`cycleStandId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
