@@ -9,12 +9,12 @@ CREATE TABLE `CycleStand` (
 
 -- CreateTable
 CREATE TABLE `CycleDock` (
+    `id` VARCHAR(191) NOT NULL,
     `cycleStandId` VARCHAR(191) NOT NULL,
-    `stand` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `CycleDock_cycleStandId_key`(`cycleStandId`),
-    PRIMARY KEY (`cycleStandId`)
+    UNIQUE INDEX `CycleDock_id_key`(`id`),
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `CycleDock` ADD CONSTRAINT `CycleDock_stand_fkey` FOREIGN KEY (`stand`) REFERENCES `CycleStand`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `CycleDock` ADD CONSTRAINT `CycleDock_cycleStandId_fkey` FOREIGN KEY (`cycleStandId`) REFERENCES `CycleStand`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
