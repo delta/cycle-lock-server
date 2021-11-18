@@ -10,14 +10,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  RollNo       Int            @id
+  Name         String         @db.VarChar(255)
+  UsageHistory UsageHistory[]
+}
+
 model CycleStand {
-  id           String       @id @unique
-  location     String       @db.VarChar(255)
-  cycleDock    CycleDock[]
+  Id        String      @id @unique
+  Location  String      @db.VarChar(255)
+  CycleDock CycleDock[]
 }
 
 model CycleDock {
-  id             String         @id @unique
-  cycleStand     CycleStand     @relation(fields: [cycleStandId], references: [id])
-  cycleStandId   String
+  Bluetooth  String         @id @unique
+  CycleStand CycleStand     @relation(fields: [StandId], references: [Id])
+  StandId    String
+  ExitCycle  UsageHistory[] @relation("startdock")
+  EntryCycle UsageHistory[] @relation("enddock")
+
+}
+
+model Cycle {
+  Id           Int            @id @default(autoincrement())
+  Model        String         @db.VarChar(255)
+  UsageHistory UsageHistory[]
+}
+
+model UsageHistory {
+  Id             Int       @id
+  Cycle          Cycle     @relation(fields: [CycleId], references: [Id])
+  CycleId        Int
+  User           User      @relation(fields: [UserRollNo], references: [RollNo])
+  UserRollNo     Int
+  StartCycledock CycleDock @relation("startdock", fields: [StartDock], references: [Bluetooth])
+  StartTime      DateTime
+  StartDock      String
+  EndCycledock   CycleDock @relation("enddock", fields: [EndDock], references: [Bluetooth])
+  EndTime        DateTime
+  EndDock        String
 }
