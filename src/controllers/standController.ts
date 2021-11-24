@@ -4,8 +4,13 @@ import prisma from '../config/prismaClient';
 import { generateStandId } from '../utils/utils';
 
 export const validateLocation = [
-  check('Location').exists().trim().not().isEmpty().withMessage('Location is required')
-]
+  check('Location')
+    .exists()
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('Location is required')
+];
 
 export const registerStand = async (
   req: Request,

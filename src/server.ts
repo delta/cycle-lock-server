@@ -1,6 +1,5 @@
 import express, { Application, Request, Response } from 'express';
-import path from "path";
-const ejs = require("ejs");
+import path from 'path';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -8,7 +7,7 @@ import cors from 'cors';
 const app: Application = express();
 dotenv.config();
 
-app.set("views", path.join(__dirname, "views"));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // Routers
 import registrationRouter from './routes/registration';
@@ -44,15 +43,15 @@ initSession(app);
 
 //Routes
 app.get('/register/stand', async (req: Request, res: Response) => {
-  res.render("registerStand");
+  res.render('registerStand');
 });
 app.get('/register/dock', async (req: Request, res: Response) => {
-  res.render("registerDock");
+  res.render('registerDock');
 });
 app.get('/register/cycle', async (req: Request, res: Response) => {
-  res.render("registerCycle");
+  res.render('registerCycle');
 });
-app.use('/register',registrationRouter);
+app.use('/register', registrationRouter);
 
 app.get('/', async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send('work in progress');
