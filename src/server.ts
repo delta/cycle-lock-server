@@ -53,8 +53,8 @@ app.get('/register/cycle', async (req: Request, res: Response) => {
 });
 app.use('/register', registrationRouter);
 
-app.get('/', async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200).send('work in progress');
+app.get('/', async (req: Request, res: Response) => {
+  res.render('dashboard');
 });
 
 try {
