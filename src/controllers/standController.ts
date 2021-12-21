@@ -33,7 +33,7 @@ export const registerStand = async (
       }
     });
     if (exists?.Id && exists.Id) {
-      res.render('components/error.ejs');
+      res.render('components/standError.ejs');
       return res.status(409);
     }
 

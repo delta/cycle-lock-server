@@ -23,11 +23,12 @@ model CycleStand {
 }
 
 model CycleDock {
-  Bluetooth  String         @id @unique @default(uuid())
-  CycleStand CycleStand     @relation(fields: [StandId], references: [Id])
-  StandId    String
-  ExitCycle  UsageHistory[] @relation("startdock")
-  EntryCycle UsageHistory[] @relation("enddock")
+  Bluetooth   String         @unique @default(uuid())
+  ReferenceId String         @id @unique
+  CycleStand  CycleStand     @relation(fields: [StandId], references: [Id])
+  StandId     String
+  ExitCycle   UsageHistory[] @relation("startdock")
+  EntryCycle  UsageHistory[] @relation("enddock")
 
 }
 

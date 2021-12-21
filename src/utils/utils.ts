@@ -5,6 +5,6 @@ export const generateStandId = (): string => {
   return cryptoRandomString({ length: 16, type: 'url-safe' });
 };
 
-// export const generateUUID = (): string => {
-//   return uuidv4();
-// };
+export const generateRefrenceId = (): string => {
+  return cryptoRandomString({ length: 16, type: 'url-safe' });
+};

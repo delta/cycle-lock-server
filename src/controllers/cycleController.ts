@@ -27,7 +27,7 @@ export const registerCycle = async (
         Model: Model
       }
     });
-    res.render('/components/success');
+    res.render('components/success.ejs');
     return res.status(200);
   } catch (error) {
     return res.status(500).json({ message: 'Internal server error' });
