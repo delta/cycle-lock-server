@@ -18,10 +18,12 @@ CREATE TABLE `CycleStand` (
 -- CreateTable
 CREATE TABLE `CycleDock` (
     `Bluetooth` VARCHAR(191) NOT NULL,
+    `ReferenceId` VARCHAR(191) NOT NULL,
     `StandId` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `CycleDock_Bluetooth_key`(`Bluetooth`),
-    PRIMARY KEY (`Bluetooth`)
+    UNIQUE INDEX `CycleDock_ReferenceId_key`(`ReferenceId`),
+    PRIMARY KEY (`ReferenceId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
