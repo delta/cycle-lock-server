@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import prisma from '../config/prismaClient';
-import { generateRefrenceId } from '../utils/utils';
 
 export const validateStandId = [
   check('StandId')
@@ -17,35 +16,37 @@ export const registerDock = async (
   res: Response
 ): Promise<unknown> => {
   const errors = validationResult(req);
-  let ReferenceId = generateRefrenceId();
   const { StandId } = req.body;
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const exists = await prisma.cycleDock.findFirst({
+  const exists = await prisma.cycleStand.findFirst({
     where: {
-      ReferenceId: ReferenceId
+      Id: StandId
     },
     select: {
-      ReferenceId: true
+      Id: true
     }
   });
-  if (exists?.ReferenceId && exists.ReferenceId) {
-    ReferenceId = generateRefrenceId();
+  if (!exists?.Id || !exists.Id) {
+    const code = 409;
+    const file = 'dock';
+    res.render('components/response.ejs', { code: code, file: file });
+    return res.status(409);
   }
 
   try {
     await prisma.cycleDock.create({
       data: {
-        // Bluetooth: uuid,
-        ReferenceId: ReferenceId,
         StandId: StandId
       }
     });
-    res.render('components/success.ejs');
+    const code = 200;
+    res.render('components/response.ejs', { code: code });
     return res.status(200);
   } catch (error) {
-    res.render('components/dockError.ejs');
+    const code = 409;
+    res.render('components/response.ejs', { code: code });
     return res.status(409);
   }
 };

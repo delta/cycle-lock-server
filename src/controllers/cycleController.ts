@@ -27,9 +27,12 @@ export const registerCycle = async (
         Model: Model
       }
     });
-    res.render('components/success.ejs');
+    const code = 200;
+    res.render('components/response.ejs', { code: code });
     return res.status(200);
   } catch (error) {
-    return res.status(500).json({ message: 'Internal server error' });
+    const code = 500;
+    res.render('components/response.ejs', { code: code });
+    return res.status(500);
   }
 };

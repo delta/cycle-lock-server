@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import prisma from '../config/prismaClient';
-import { generateStandId } from '../utils/utils';
 
 export const validateLocation = [
   check('Location')
@@ -21,7 +20,6 @@ export const registerStand = async (
     return res.status(400).json({ errors: errors.array() });
   }
 
-  // const { Location } = req.body;
   try {
     const { Location } = req.body;
     const exists = await prisma.cycleStand.findFirst({
@@ -33,21 +31,23 @@ export const registerStand = async (
       }
     });
     if (exists?.Id && exists.Id) {
-      res.render('components/standError.ejs');
+      const code = 409;
+      const file = 'stand';
+      res.render('components/response.ejs', { code: code, file: file });
       return res.status(409);
     }
-
-    const Id = generateStandId();
     await prisma.cycleStand.create({
       data: {
-        Location: Location,
-        Id: Id
+        Location: Location
       }
     });
-    res.render('components/success.ejs');
-    // res.redirect('/');
+    // res.render('components/success.ejs');
+    const code = 200;
+    res.render('components/response.ejs', { code: code });
     return res.status(200);
   } catch (error) {
-    return res.status(500).json({ message: 'Internal server error' });
+    const code = 500;
+    res.render('components/response.ejs', { code: code });
+    return res.status(500);
   }
 };

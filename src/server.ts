@@ -9,6 +9,7 @@ dotenv.config();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 // Routers
 import registrationRouter from './routes/registration';
 
@@ -41,19 +42,9 @@ app.use(
 // Initialise session
 initSession(app);
 
-//Routes
-app.get('/register/stand', async (req: Request, res: Response) => {
-  res.render('registerStand');
-});
-app.get('/register/dock', async (req: Request, res: Response) => {
-  res.render('registerDock');
-});
-app.get('/register/cycle', async (req: Request, res: Response) => {
-  res.render('registerCycle');
-});
 app.use('/register', registrationRouter);
 
-app.get('/', async (req: Request, res: Response) => {
+app.use('/', async (req: Request, res: Response) => {
   res.render('dashboard');
 });
 
