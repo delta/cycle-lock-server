@@ -27,12 +27,12 @@ export const registerCycle = async (
         Model: Model
       }
     });
-    const code = 200;
-    res.render('components/response.ejs', { code: code });
+    const msg = 'Cycle registered successfully';
+    res.render('components/response.ejs', { msg: msg });
     return res.status(200);
   } catch (error) {
-    const code = 500;
-    res.render('components/response.ejs', { code: code });
+    const msg = 'Internal server error';
+    res.render('components/response.ejs', { msg: msg });
     return res.status(500);
   }
 };

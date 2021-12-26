@@ -31,9 +31,8 @@ export const registerStand = async (
       }
     });
     if (exists?.Id && exists.Id) {
-      const code = 409;
-      const file = 'stand';
-      res.render('components/response.ejs', { code: code, file: file });
+      const msg = 'A stand already exists in this location';
+      res.render('components/response.ejs', { msg: msg });
       return res.status(409);
     }
     await prisma.cycleStand.create({
@@ -41,13 +40,12 @@ export const registerStand = async (
         Location: Location
       }
     });
-    // res.render('components/success.ejs');
-    const code = 200;
-    res.render('components/response.ejs', { code: code });
+    const msg = 'Stand registered successfully';
+    res.render('components/response.ejs', { msg: msg });
     return res.status(200);
   } catch (error) {
-    const code = 500;
-    res.render('components/response.ejs', { code: code });
+    const msg = 'Internal server error';
+    res.render('components/response.ejs', { msg: msg });
     return res.status(500);
   }
 };

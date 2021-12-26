@@ -7,17 +7,7 @@
       crossorigin="anonymous"
     />
     <div class="alert alert-info" role="alert" style="text-align: center">
-        <% if(code == 200){ %>
-            Regsitration successful
-        <% } else if(code == 400){ %>  
-            Invalid Input
-        <% } else if(code == 409 && file == 'stand'){ %>  
-            Stand in this location already exists
-        <% } else if(code == 409 && file == 'dock'){ %>  
-            Stand Id is incorrect
-        <% } else if(code == 500) { %>  
-            Internal Server error
-        <% } %>
+        <%= msg %>     
     </div>
     <a href="/">Return back</a>
   </head>

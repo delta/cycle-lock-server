@@ -29,9 +29,8 @@ export const registerDock = async (
     }
   });
   if (!exists?.Id || !exists.Id) {
-    const code = 409;
-    const file = 'dock';
-    res.render('components/response.ejs', { code: code, file: file });
+    const msg = 'Stand Id is incorrect';
+    res.render('components/response.ejs', { msg: msg });
     return res.status(409);
   }
 
@@ -41,12 +40,12 @@ export const registerDock = async (
         StandId: StandId
       }
     });
-    const code = 200;
-    res.render('components/response.ejs', { code: code });
+    const msg = 'Dock registered successfully';
+    res.render('components/response.ejs', { msg: msg });
     return res.status(200);
   } catch (error) {
-    const code = 409;
-    res.render('components/response.ejs', { code: code });
+    const msg = 'Internal server error';
+    res.render('components/response.ejs', { msg: msg });
     return res.status(409);
   }
 };
