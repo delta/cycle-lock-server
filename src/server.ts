@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import path from 'path';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -6,8 +7,11 @@ import cors from 'cors';
 const app: Application = express();
 dotenv.config();
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 // Routers
-// todo
+import registrationRouter from './routes/registration';
 
 import { initSession } from './config/session';
 
@@ -38,11 +42,10 @@ app.use(
 // Initialise session
 initSession(app);
 
-//Routes
-//app.use('/', router);
+app.use('/register', registrationRouter);
 
-app.get('/', async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200).send('work in progress');
+app.use('/', async (req: Request, res: Response) => {
+  res.render('dashboard');
 });
 
 try {
