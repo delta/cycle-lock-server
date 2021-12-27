@@ -5,7 +5,10 @@ import {
   registerStand
 } from '../controllers/standController';
 import { validateStandId, registerDock } from '../controllers/dockController';
-import { validateModel, registerCycle } from '../controllers/cycleController';
+import {
+  validateModel,
+  registerCycle
+} from '../controllers/Data/cycleController';
 
 router.post('/stand', validateLocation, registerStand);
 router.get('/stand', async (req: Request, res: Response) => {
