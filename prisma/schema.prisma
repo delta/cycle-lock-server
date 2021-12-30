@@ -39,15 +39,15 @@ model Cycle {
 }
 
 model UsageHistory {
-  Id             Int       @id
+  Id             Int       @id @default(autoincrement())
   Cycle          Cycle     @relation(fields: [CycleId], references: [Id])
   CycleId        Int
   User           User      @relation(fields: [UserRollNo], references: [RollNo])
   UserRollNo     Int
-  StartCycledock CycleDock @relation("startdock", fields: [StartDock], references: [Bluetooth])
+  StartCycledock CycleDock @relation("startdock", fields: [StartDock], references: [StandId])
   StartTime      DateTime
   StartDock      String
-  EndCycledock   CycleDock @relation("enddock", fields: [EndDock], references: [Bluetooth])
+  EndCycledock   CycleDock @relation("enddock", fields: [EndDock], references: [StandId])
   EndTime        DateTime
   EndDock        String
 }

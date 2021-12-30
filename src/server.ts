@@ -3,6 +3,9 @@ import path from 'path';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cors from 'cors';
+import cycleRouter from './routes/cycle';
+import usageRouter from './routes/usage';
+import Auth from './routes/Auth';
 
 const app: Application = express();
 dotenv.config();
@@ -14,8 +17,15 @@ app.set('view engine', 'ejs');
 import registrationRouter from './routes/registration';
 
 import { initSession } from './config/session';
+// import { nextTick } from 'process';
+
+require('ejs');
 
 const port = process.env.PORT;
+
+app.use(express.static(path.join(__dirname, '/../public')));
+app.set('views', path.join(__dirname, '/../views'));
+app.set('view engine', 'ejs');
 
 // Body parsing Middleware
 app.use(express.json());
@@ -42,9 +52,24 @@ app.use(
 // Initialise session
 initSession(app);
 
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Content-Security-Policy',
+    "script-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js 'unsafe-inline'"
+  );
+  next();
+});
+
+// Dauth Check
+app.use('/', Auth);
+
 app.use('/register', registrationRouter);
 
-app.use('/', async (req: Request, res: Response) => {
+app.use('/usage', usageRouter);
+
+app.use('/fetch', cycleRouter);
+
+app.use('/dashboard', async (req: Request, res: Response) => {
   res.render('dashboard');
 });
 
@@ -52,6 +77,6 @@ try {
   app.listen(port, (): void => {
     console.log(`[server]: up and running on http://localhost:${port}`);
   });
-} catch (error: any) {
-  console.error(`Error occured: ${error.message}`);
+} catch (error) {
+  console.error(`Error occured: ${error}`);
 }

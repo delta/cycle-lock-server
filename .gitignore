@@ -2,3 +2,5 @@ node_modules
 .env
 build
 .docker.env
+**/config.ts/
+**/config.example.ts/
