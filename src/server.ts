@@ -55,7 +55,7 @@ initSession(app);
 app.use(function (req, res, next) {
   res.setHeader(
     'Content-Security-Policy',
-    "script-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    "script-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js 'unsafe-inline'"
   );
   next();
 });

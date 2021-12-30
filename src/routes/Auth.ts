@@ -6,7 +6,7 @@ import DAuthLogin from '../controllers/Auth/DAuthLogin';
 const router: Router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
-  res.redirect('/student/login/dauth');
+  res.render('login', { msg: null });
 });
 
 router.get('/student/login/dauth', (req, res) => {
